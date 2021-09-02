@@ -1,7 +1,13 @@
 const express = require('express')
 const path = require('path')
+//meus modulos
+const db = require('./database')
+const routes = require('./routes')
 
+//começando o servidor
 const app = express()
+
+db.connect()
 
 // definir meu tamplate engine
 app.set('view engine', 'ejs')
@@ -14,11 +20,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true}))
 
 //Rotas
-app.get('/', (req, res) => {
-  res.render('main',{ 
-    title: 'Fazer um teste'
-  })
-})
+app.use('/', routes)
+
+
 //Quando não achar a rota
 app.use((req, res)=>{
   res.send('Pagina não encontrada')

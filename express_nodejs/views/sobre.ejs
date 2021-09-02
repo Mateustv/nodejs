@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head.ejs')%>
+</head>
+
+<body>
+  <%- include('partials/header.ejs')%>
+
+    <h1>
+      Sobre
+    </h1>
+    <div>
+      <% post.forEach(element=> { %>
+        <h2>
+          <%= element.title %>
+        </h2>
+        <p>
+          <%= element.content %>
+        </p>
+        <% if(element.stars) { %>
+          <% for( let index=0; index < element.stars; index++ ) { %>
+            <img src="https://image.flaticon.com/icons/png/512/2164/2164197.png" alt="giraffe" width="30">
+            <% } %>
+              <% } %>
+                <%}) %>
+
+    </div>
+    <!-- <img src="https://image.flaticon.com/icons/png/512/2164/2164197.png" alt="giraffe" width="100"> -->
+    <%- include('partials/footer.ejs')%>
+
+      <%- include('partials/script.ejs')%>
+</body>
+
+</html>

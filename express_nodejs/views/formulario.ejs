@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head.ejs')%>
+</head>
+
+<body>
+  <%- include('partials/header.ejs')%>
+
+    <h1>
+      Formulario
+    </h1>
+
+    <% if (cadastrado) { %>
+      <p>Deu Certo</p>
+      <% } %>
+
+        <div>
+          <form action="/salvar-post" method="post">
+            <div>
+              <label>Texto</label>
+              <input type="text" name="texto">
+            </div>
+            <div>
+              <label>Informacoes</label>
+              <textarea name="infor" cols="30" rows="10"></textarea>
+            </div>
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+
+        <%- include('partials/footer.ejs')%>
+          <%- include('partials/script.ejs')%>
+</body>
+
+</html>

@@ -2,3 +2,20 @@ body {
   background-color: black;
   color: white;
 }
+ul {
+  display: flex;
+  padding: 20px;
+  margin: 20px;
+  list-style: none;
+}
+ul li {
+  margin-left: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 3px;
+}
+ul li a {
+  font-style: none;
+  text-decoration: none;
+  Color:black;
+}

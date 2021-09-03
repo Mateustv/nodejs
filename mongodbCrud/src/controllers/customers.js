@@ -18,9 +18,26 @@ async function add (req, res){
     password:passwordCriptor,
   })
   register.save()
-  res.send('Deu certo')
+  
+  res.render('register',{
+    title: 'Form',
+    titleh1: 'Formularios',
+    message:'Cadastro realizado com sucesso'
+  })
+}
+
+async function listUsers (req, res){
+  
+  const users = await CustomersModel.find()
+
+  res.render('listUser', { 
+    title: 'Lista de Usuario',
+    titleh1: 'Lista De Usuarios',
+    users,
+  })
 }
 
 module.exports = {
-  add
+  add,
+  listUsers,
 }

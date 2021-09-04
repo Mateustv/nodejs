@@ -11,6 +11,7 @@
           <li>
             <%= users.name%> - <%= users.email%> - Idade: <%= users.age%>
                   <a href="/edit?id=<%= users.id %>">[Editar]</a>
+                  <a href="/remove/<%= users.id %>">[Remover]</a>
           </li>
           <% }) %>
       </ul>

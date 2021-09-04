@@ -28,4 +28,7 @@ router.get('/list', CustomersController.listUsers)
 router.get('/edit', CustomersController.indexEdit)
 router.post('/edit/:id',CustomersController.edit)
 
+//Remover usauarios
+router.get('/remove/:id', CustomersController.remove)
+
 module.exports = router

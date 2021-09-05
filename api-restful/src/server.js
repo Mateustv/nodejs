@@ -1,6 +1,6 @@
+//Modulos
 const express = require('express')
 const path = require('path')
-
 //meus modulos
 const db = require('./database/database')
 const routes = require('./routes/routes')
@@ -11,7 +11,7 @@ const app = express()
 db.connect()
 
 // Habilitar para receber dados por via post
-app.use(express.urlencoded({ extended: true}))
+app.use(express.json())
 
 //Rotas
 app.use('/api', routes)

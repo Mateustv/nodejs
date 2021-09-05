@@ -45,8 +45,31 @@
             <li>
               ${product.name} -- ${product.brand} -- ${product.price}
             </li>
+            <a href="#" class="btn-remove" data-id="${product._id}">[Excluir]</a>
           `).join('')
           productsUl.innerHTML = productsHtml
+          const btnsRemover = document.querySelectorAll('.btn-remove')
+
+          btnsRemover.forEach(botao => {
+            botao.onclick = function (e) {
+              e.preventDefault()
+              const id = this.dataset.id
+
+              fetch(`${API_URL}/${id}`, {
+                method: 'DELETE'
+              }).then(function (response) {
+                response.json().then(data => {
+                  if (data.message === 'deu certo') {
+                    alert('Produto Removido com sucesso')
+                    listProduct()
+                  } else {
+                    alert('Erro!')
+                    listProduct()
+                  }
+                })
+              })
+            }
+          })
         })
       })
     }

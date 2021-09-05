@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -9,11 +9,79 @@
 </head>
 
 <body>
+  <h2>Lista cadastrada</h2>
+  <ul id="list-db"></ul>
+  <hr>
+
+  <h2>Cadastrar Novos Itens</h2>
+  <form id="form">
+    <label>
+      Nome:
+    </label>
+    <input type="text" name="name">
+    <label>
+      Marca:
+    </label>
+    <input type="text" name="brand">
+    <label>
+      Preço:
+    </label>
+    <input type="text" name="price">
+    <button type="submit">Enviar</button>
+  </form>
+
+
   <script>
-    fetch('http://localhost:8080/api/products').then(function (response) {
-      response.json().then(dates => {
-        console.log(dates)
+    const productsUl = document.querySelector('#list-db')
+    const form = document.querySelector('#form')
+    const API_URL = 'http://localhost:8080/api/products'
+
+    //Listando meu produtos cadastrados
+    function listProduct() {
+      fetch(API_URL).then(function (response) {
+        response.json().then(dates => {
+          const productsHtml = dates.map(product =>
+            `
+            <li>
+              ${product.name} -- ${product.brand} -- ${product.price}
+            </li>
+          `).join('')
+          productsUl.innerHTML = productsHtml
+        })
       })
+    }
+
+    listProduct()
+
+    //cadastrando usuario
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const name = document.forms['form'].name.value
+      const brand = document.forms['form'].brand.value
+      const price = document.forms['form'].price.value
+
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          brand,
+          price,
+        })
+      }).then(response => {
+        response.json().then(data => {
+          if (data.message === 'ok!') {
+            form.reset()
+            listProduct()
+            alert('Cadastro Realizado com Sucesso')
+          } else {
+            alert('Ops! Ocorreu um erro')
+          }
+        })
+      })
+
     })
   </script>
 </body>
